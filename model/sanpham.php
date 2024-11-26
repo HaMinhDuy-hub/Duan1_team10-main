@@ -20,25 +20,27 @@ function delete_sanpham($id)
     $sql = "DELETE FROM `products` WHERE id=" . $id;
     pdo_execute($sql);
 }
-function loadone_sanpham($id)
-{
-    $sql = "select * from products where category_id=".$_GET['id'];
+function loadone_sanpham($id) {
+    $sql = "SELECT * FROM products WHERE id = " . $id;
     $sp = pdo_query_one($sql);
     return $sp;
 }
-function loadAll_sanphampage($keyw,$category_id){
-    if($category_id != ""){
-        $sql = "select * from products where category_id =".$category_id." order by category_id asc";
+function loadAll_sanphampage($keyw, $category_id) {
+    $sql = "SELECT * FROM products WHERE 1";
+
+    if ($category_id != "") {
+        $sql .= " AND category_id = " . $category_id;
     }
-    else{
-        $sql = "select * from products where 1 order by category_id asc";
+
+    if ($keyw != "") {
+        $sql .= " AND name LIKE '%" . $keyw . "%'";
     }
-    if($keyw !=""){
-        $sql = "select * from products where name like '%".$keyw."%'";
-    }
+
+    $sql .= " ORDER BY category_id ASC";
     $list_sp = pdo_query($sql);
     return $list_sp;
 }
+
 function update_sanpham($category_id, $id, $name, $price, $description, $product_image)
 {
     if ($product_image != "") 
@@ -47,8 +49,8 @@ function update_sanpham($category_id, $id, $name, $price, $description, $product
         $sql = "UPDATE `products` SET `category_id`='" . $category_id . "', `name`='" . $name . "',`price`='" . $price . "',`description`='" . $description . "' WHERE id=" . $id; 
     pdo_execute($sql);
 }
-function load_sanpham_cungloai($id,$category_id){
-    $sql = "select * from products where category_id=".$category_id." and category_id <>".$id;
+function load_sanpham_cungloai($id, $category_id) {
+    $sql = "SELECT * FROM products WHERE category_id = " . $category_id . " AND id <> " . $id;
     $listsp = pdo_query($sql);
     return $listsp;
 }

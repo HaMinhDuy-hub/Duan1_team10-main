@@ -7,8 +7,9 @@ foreach ($dssp_new as $item) {
                     <div class="payne-product">
                         <div class="product__inner">
                             <div class="product__image">
+                            <form action="index.php?act=themgiohang" method="post">
                                 <figure class="product__image--holder">
-                                    <img src="img/products/'.$product_image.'" alt="Product">
+                                     <img src="'.$img_path.$product_image.'" alt="Product">
                                 </figure>
                                 <a href="index.php?act=chitietsp" class="product-overlay"></a>
                                 <div class="product__action">
@@ -25,7 +26,7 @@ foreach ($dssp_new as $item) {
                                         <i class="fa fa-repeat"></i>
                                         <span class="sr-only">Add To Compare</span>
                                     </a>
-                                    <a href="index.php?act=giohang" class="action-btn">
+                                    <a href="index.php?act=giohang" class="action-btn" name="themgiohang">
                                         <i class="fa fa-shopping-cart"></i>
                                         <span class="sr-only">Add To Cart</span>
                                     </a>
@@ -37,8 +38,8 @@ foreach ($dssp_new as $item) {
                                         <a href="index.php?act=chitietsp">'.$name.'</a>
                                     </h3>
                                     <div class="product__price">
-                                        <span class="money">'.$price.'</span>
-                                        <span class="sign">$</span>
+                                        <span class="money">'.number_format($price, 0, ',', '.').'</span>
+                                        <span class="sign">VNĐ</span>
                                     </div>
                                 </div>
                                 <div class="product__info--right">
@@ -51,6 +52,15 @@ foreach ($dssp_new as $item) {
                                     </span>
                                 </div>
                             </div>
+                            <div >
+                                <input type="submit" name="themgiohang" value="Mua Hàng" class="btn btn-primary"/>
+                            </div>
+                            <input type="hidden" name="id" value="'.$category_id.'"/>
+                            <input type="hidden" name="tensp" value="'.$name.'"/>
+                            <input type="hidden" name="gia" value="'.$price.'"/>
+                            <input type="hidden" name="img" value="'.$product_image.'"/>
+                            
+                            </form>
                         </div>
                     </div>
                 </div>';

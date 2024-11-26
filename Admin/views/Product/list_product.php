@@ -41,7 +41,7 @@ $products = Product::getAll(); // Lấy tất cả sản phẩm
                     <td><?= $product['created_at'] ?></td>
                     <td>
                         <?php if ($product['product_image']) : ?>
-                            <img src="upload/<?= $product['product_image'] ?>" alt="Ảnh sản phẩm" width="50">
+                            <img src="/Duan1_team10-main/upload/<?= htmlspecialchars($product['product_image']) ?>" alt="Ảnh sản phẩm" width="50">
                         <?php else: ?>
                             <p>Không có ảnh</p>
                         <?php endif; ?>

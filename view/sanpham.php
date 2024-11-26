@@ -25,10 +25,16 @@
                             <div class="col-md-5 mb-sm--30 mb-xs--10">
                                 <div class="shop-toolbar__left">
                                     <div class="product-ordering">
-                                        <select class="product-ordering__select nice-select">
-                                            <option value="0">balo Thời trang</option>
-                                            <option value="1">balo du lịch</option>
+                                        <select class="product-ordering__select nice-select"
+                                            onchange="location = this.value;">
+                                            <?php 
+                                                foreach ($list_danhmuc as $danhmuc) {
+                                                    extract($danhmuc);
+                                                    echo '<option value="index.php?act=sanpham&iddm='.$id.'">'.$name.'</option>';
+                                                }
+                                                ?>
                                         </select>
+
                                     </div>
                                 </div>
                             </div>
@@ -76,7 +82,7 @@
                                                     <i class="fa fa-repeat"></i>
                                                     <span class="sr-only">Add To Compare</span>
                                                 </a>
-                                                <a href="index.php?act=giohang" class="action-btn">
+                                                <a href="index.php?act=giohang" class="action-btn" >
                                                     <i class="fa fa-shopping-cart"></i>
                                                     <span class="sr-only">Add To Cart</span>
                                                 </a>
@@ -116,20 +122,22 @@
                 <div class="col-xl-3 col-lg-4 order-lg-1">
                     <aside class="shop-sidebar">
                         <div class="shop-widget mb--40">
-                            <h3 class="widget-title mb--25">Category</h3>
+                            <h3 class="widget-title mb--25">Danh Mục Sản Phẩm</h3>
                             <ul class="widget-list category-list">
-                                <li>
-                                    <a href="shop.html">
-                                        <span class="category-title">Winter Collection</span>
+                                <?php 
+                                foreach ($list_danhmuc as $danhmuc) {
+                                    extract($danhmuc);
+                                    echo' 
+                                    <li>
+                                    <a href="index.php?act=sanpham&iddm='.$id.'">
+                                        <span class="category-title">'.$name.'</span>
                                         <i class="fa fa-angle-double-right"></i>
                                     </a>
-                                </li>
-                                <li>
-                                    <a href="shop.html">
-                                        <span class="category-title">Women’s Clothes</span>
-                                        <i class="fa fa-angle-double-right"></i>
-                                    </a>
-                                </li>
+                                    </li>';
+                                }
+                                ?>
+
+
                             </ul>
                         </div>
 
