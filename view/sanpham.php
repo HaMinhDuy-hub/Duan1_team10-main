@@ -69,10 +69,9 @@
                                             </figure>
                                             <a href="index.php?act=chitietsp&id='.$category_id.'" class="product__overlay"></a>
                                             <div class="product__action">
-                                                <a data-bs-toggle="modal" data-bs-target="#productModal"
-                                                    class="action-btn">
-                                                    <i class="fa fa-eye"></i>
-                                                    <span class="sr-only">Quick View</span>
+                                                <a href="index.php?act=chitietsp&id='.$category_id.'" class="action-btn">
+                                                   <i class="fa fa-eye"></i>
+                                                    <span class="sr-only">Add to wishlist</span>
                                                 </a>
                                                 <a href="index.php?act=chitietsp&id='.$category_id.'" class="action-btn">
                                                     <i class="fa fa-heart-o"></i>

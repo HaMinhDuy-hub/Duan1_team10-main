@@ -1,9 +1,10 @@
 <?php
-    function loadall_danhmuc(){
-        $sql="select * from categories order by id asc";
-        $listdanhmuc=pdo_query($sql);
-        return $listdanhmuc;
-    }
+   function loadall_danhmuc()
+   {
+       $sql = "SELECT * FROM categories WHERE deleted_at IS NULL ORDER BY id ASC";
+       $listdanhmuc = pdo_query($sql);
+       return $listdanhmuc;
+   }
 
     function insert_danhmuc($tenloai){
         $sql="insert into categories(name) values('$tenloai')";

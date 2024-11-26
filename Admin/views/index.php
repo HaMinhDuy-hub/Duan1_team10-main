@@ -2,7 +2,7 @@
 session_start();
 include "header.php";
 include "navbar.php";
-// include "sidebar.php";
+include "sidebar.php";
 include "../model/pdo.php";
 include "../model/Product.php";
 include "../model/Category.php";
