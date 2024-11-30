@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include "header.php";
 include "navbar.php";
@@ -540,3 +541,5 @@ case "delete_user":
 }
 
 include "footer.php";
+ob_end_flush();
+?>
