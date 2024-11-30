@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES['product_image']) && $_FILES['product_image']['error'] == UPLOAD_ERR_OK) {
         $image_tmp = $_FILES['product_image']['tmp_name'];
         $image_name = uniqid() . '_' . $_FILES['product_image']['name'];
-        $upload_dir = __DIR__ . '/../../../upload/';
+        $upload_dir = __DIR__ . '/Duan1_team10-main/upload/';
         if (!is_dir($upload_dir)) {
             mkdir($upload_dir, 0777, true); // Tạo thư mục nếu chưa tồn tại
         }

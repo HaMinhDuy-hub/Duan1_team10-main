@@ -36,17 +36,12 @@ class Product
 
     // Cập nhật thông tin sản phẩm
     public static function update($id, $category_id, $name, $price, $description, $product_image)
-    {
-        $sql = "UPDATE products SET category_id = ?, name = ?, price = ?, description = ?, product_image = ? 
-                WHERE id = ? AND deleted_at IS NULL";
-        try {
-            return pdo_execute($sql, $category_id, $name, $price, $description, $product_image, $id); // Cập nhật thông tin sản phẩm
-        } catch (PDOException $e) {
-            // Ghi lại lỗi nếu có
-            error_log($e->getMessage());
-            throw new Exception('Lỗi khi cập nhật sản phẩm.');
-        }
-    }
+{
+    $sql = "UPDATE products SET category_id = ?, name = ?, price = ?, description = ?, product_image = ?
+            WHERE id = ? AND deleted_at IS NULL";
+    return pdo_execute($sql, $category_id, $name, $price, $description, $product_image, $id);
+}
+
 
     // Khôi phục sản phẩm đã xóa
     public static function restore($id)

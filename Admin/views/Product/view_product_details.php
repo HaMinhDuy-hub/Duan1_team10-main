@@ -6,7 +6,7 @@ if (isset($_GET['id'])) {
     $productVariants = Product::getProductDetails($product_id);
 
     if (!$productVariants) {
-        echo "<p>Sản phẩm không tồn tại hoặc đã bị xóa.</p>";
+        echo "<p>Sản phẩm chưa có biến thể.</p>";
         exit;
     }
 }

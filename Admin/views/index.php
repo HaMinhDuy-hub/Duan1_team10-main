@@ -228,7 +228,8 @@ case "edit_product":
 
 // Cập nhật sản phẩm
 case "update_product":
-    if (isset($_POST['update']) && $_POST['update']) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
+        // Nhận dữ liệu từ form
         $id = $_POST["id"];
         $category_id = $_POST["category_id"];
         $name = trim($_POST['name']);
@@ -236,25 +237,38 @@ case "update_product":
         $description = $_POST['description'];
         $product_image = $_FILES['product_image']['name'];
 
-        // Upload hình ảnh sản phẩm (nếu có)
-        if ($product_image) {
-            $target_dir = "uploads/products/";
+        // Kiểm tra nếu có ảnh mới được upload
+        if (!empty($product_image)) {
+            $target_dir = "upload/"; // Đường dẫn lưu ảnh (cần chỉnh đúng theo hệ thống)
             $target_file = $target_dir . basename($product_image);
-            move_uploaded_file($_FILES['product_image']['tmp_name'], $target_file);
+
+            if (move_uploaded_file($_FILES['product_image']['tmp_name'], $target_file)) {
+                // Upload thành công
+            } else {
+                $_SESSION['message'] = "Không thể upload ảnh.";
+                header('Location: index.php?act=edit_product&id=' . $id);
+                exit;
+            }
+        } else {
+            // Nếu không có ảnh mới, lấy ảnh cũ
+            $existingProduct = Product::getOne($id);
+            $product_image = $existingProduct['product_image'];
         }
 
-        if (!empty($name)) {
+        // Kiểm tra thông tin đầu vào
+        if (!empty($name) && !empty($category_id) && !empty($price)) {
             Product::update($id, $category_id, $name, $price, $description, $product_image);
             $_SESSION['message'] = "Cập nhật sản phẩm thành công!";
+            header('Location: index.php?act=list_product');
+            exit;
         } else {
-            $_SESSION['message'] = "Vui lòng nhập tên sản phẩm!";
+            $_SESSION['message'] = "Vui lòng điền đầy đủ thông tin.";
+            header('Location: index.php?act=edit_product&id=' . $id);
+            exit;
         }
-
-        // Điều hướng về trang danh sách sản phẩm sau khi cập nhật thành công
-        header('Location: index.php?act=list_product');
-        exit; // Chấm dứt script để tránh việc tiếp tục thực thi mã sau khi điều hướng
     }
     break;
+
 
 // Kho lưu trữ sản phẩm (Sản phẩm đã xóa mềm)
 case "archive_products":
